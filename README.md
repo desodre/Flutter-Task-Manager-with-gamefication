@@ -1,3 +1,3 @@
-# aula_da_alura
+# Simple Task Manager
 
-Novo projetinho testando o flutter.
+A simple task manager to implement all flutter learning

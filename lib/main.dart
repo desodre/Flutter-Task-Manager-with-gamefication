@@ -1,16 +1,14 @@
+import 'package:aula/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 import 'package:aula/Screens/taskwindow.dart';
-import 'package:aula/Screens/form_screen.dart';
 
 void main() {
-  runApp(MainWindow());
+  runApp(const MainWindow());
 }
 
 // ignore: must_be_immutable
 class MainWindow extends StatelessWidget {
-  MainWindow({super.key});
-
-  bool opacity = true;
+  const MainWindow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,7 @@ class MainWindow extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeWindow(),
+      home: TaskInherited(child: const HomeWindow()),
     );
   }
 }

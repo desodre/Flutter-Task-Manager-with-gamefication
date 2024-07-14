@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:aula/components/Dificulty.dart';
 
+//ignore: must_be_immutable
 class TaskOverAll extends StatefulWidget {
   final String _taskName;
   final String foto;
   final int dificuldade;
+  int nivel = 0;
 
-  const TaskOverAll(
+  TaskOverAll(
       {super.key,
       required String taskName,
       required this.foto,
@@ -18,7 +20,6 @@ class TaskOverAll extends StatefulWidget {
 }
 
 class _TaskOverAllState extends State<TaskOverAll> {
-  int nivel = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,11 +34,11 @@ class _TaskOverAllState extends State<TaskOverAll> {
               height: 140,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: nivel < 10
+                color: widget.nivel < 10
                     ? Colors.blue
-                    : nivel < 20
+                    : widget.nivel < 20
                         ? Colors.amber
-                        : nivel < 30
+                        : widget.nivel < 30
                             ? Colors.green
                             : Colors.black,
               ),
@@ -62,10 +63,14 @@ class _TaskOverAllState extends State<TaskOverAll> {
                         ),
                         width: 72,
                         height: 100,
-                        child: Image.asset(
-                          widget.foto,
-                          fit: BoxFit.cover,
-                        ),
+                        child: widget.foto.contains("http")
+                            ? Image.network(widget.foto)
+                            : Image.asset(
+                                widget.foto.contains("/")
+                                    ? widget.foto
+                                    : "assets/images/flutter_mascote.png",
+                                fit: BoxFit.cover,
+                              ),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +97,7 @@ class _TaskOverAllState extends State<TaskOverAll> {
                                   borderRadius: BorderRadius.circular(5))),
                           onPressed: () {
                             setState(() {
-                              nivel++;
+                              widget.nivel++;
                             });
                           },
                           child: const Column(
@@ -124,7 +129,7 @@ class _TaskOverAllState extends State<TaskOverAll> {
                         child: LinearProgressIndicator(
                           color: Colors.white,
                           value: widget.dificuldade > 0
-                              ? (nivel / widget.dificuldade) / 10
+                              ? (widget.nivel / widget.dificuldade) / 10
                               : 1,
                         ),
                       ),
@@ -132,7 +137,7 @@ class _TaskOverAllState extends State<TaskOverAll> {
                     Padding(
                       padding: const EdgeInsets.all(10),
                       child: Text(
-                        "Nivel: $nivel",
+                        "Nivel: ${widget.nivel}",
                         style: const TextStyle(
                           color: Colors.white,
                         ),

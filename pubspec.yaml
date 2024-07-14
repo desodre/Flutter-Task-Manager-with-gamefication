@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   animated_hint_textfield: ^1.0.0
+  sqflite: ^2.3.3+1
 
   flutter:
     sdk: flutter
